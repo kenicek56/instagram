@@ -9,7 +9,20 @@ define('clientID',	'fa48296f5aa047f48fb9b9192bac9238');
 define('clientSecret', 'b2974fae436c47a890b6a090b1777897'); 
 define('redirectURI', 'http://localhost/Kenicesta/index.php'); 
 define('ImageDirectory','pics/'); 
+ 
+if isset(($_GET['code'])) {
+	$code = ($_GET['code']);
+	$url = 'https://api.instagram.com/oauth/access_token';
+	$access_token_settings = array('client_id' => clientID,
+									'client_secret' => clientSecret,
+									'grant_type' => 'authorization_code',
+									'redirect_uri' => redirectURI,
+									'code' => $code
+									);
+}
  ?>
+
+
 <!DOCTYPE html>
 <html>
 
