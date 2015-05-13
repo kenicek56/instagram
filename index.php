@@ -31,11 +31,14 @@ if (isset($_GET['code'])) {
 	// but in live work-production we want to set this to true
 	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
       
-     }
      $result = curl_exec($curl);
      curl_close();
- ?>
 
+     $results = json_decode($result, true);
+	 echo $results['user']['username'];
+     }
+     else{
+?>  
 
 <!DOCTYPE html>
 <html>
@@ -56,3 +59,6 @@ if (isset($_GET['code'])) {
 <script src="js/main.js"></script>
 </body>
 </html>
+<?php
+}
+?>
