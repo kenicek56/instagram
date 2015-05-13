@@ -17,7 +17,7 @@ if (isset($_GET['code'])) {
 									'client_secret' => clientSecret,
 									'grant_type' => 'authorization_code',
 									'redirect_uri' => redirectURI,
-									'code' => $code)
+									'code' => $code) 
 }
  ?>
 
