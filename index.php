@@ -13,6 +13,7 @@ define('ImageDirectory','pics/');
   // function that is going to connet to insta
 	function connectToInstagram($url){
 		$ch = curl_init();
+		
 		curl_setopt_array($ch, array(
 			CURLOPT_URL => $url,
 			CURLOPT_RETURNTRANSFER => true,
@@ -22,8 +23,16 @@ define('ImageDirectory','pics/');
 		$result = curl_exec($ch);
 		return $result;
 	}
+	// function to get userID cause username doesnt allow us to get pics
+	function getUserID($userName){
+		$url = 'https://api.instagram.com/v1/users/search?q=' .$userName. '&client_id='.clientID;
+		$instagramInfo = connectToInstagram($url);
+		$results = json_decode($instagramInfo, true);
+		
+		echo $results['data']['0']['id'];
+	}
 
-if (isset($_GET['code'])) {
+if (isset($_GET['code'])){
 	$code = ($_GET['code']);
 	$url = 'https://api.instagram.com/oauth/access_token';
 	$access_token_settings = array('client_id' => clientID,
@@ -45,10 +54,10 @@ if (isset($_GET['code'])) {
 	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
       
      $result = curl_exec($curl);
-     curl_close();
+     curl_close($curl);
 
      $results = json_decode($result, true);
-	 echo $results['user']['username'];
+	 getUserID($results['user']['username']);
      }
      else{
 ?>  
