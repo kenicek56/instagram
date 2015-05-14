@@ -30,7 +30,7 @@ define('ImageDirectory','pics/');
 		$instagramInfo = connectToInstagram($url);
 		$results = json_decode($instagramInfo, true);
 		
-		echo $results['data']['0']['id'];
+		return $results['data']['0']['id'];
 	}
 
 	// function to print out images on screen
@@ -39,7 +39,7 @@ define('ImageDirectory','pics/');
 		$instagramInfo = connectToInstagram($url);
 		$results = json_decode($instagramInfo, true);
 		//parse through the information one by one 
-		foreach($results['data'] as $items){
+		foreach ($results['data'] as $items){
 			// going to go through all of my results and give myself back the url of those pictures because we want to save it in the PHP server
 			$image_url = $items['images']['low_resolution']['url'];
 			echo '<img src=" ' .$image_url. ' "/><br/>';
