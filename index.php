@@ -21,6 +21,7 @@ define('ImageDirectory','pics/');
 			CURLOPT_SSL_VERIFYHOST => 2,
 			));
 		$result = curl_exec($ch);
+		curl_close($ch);
 		return $result;
 	}
 	// function to get userID cause username doesnt allow us to get pics
@@ -30,6 +31,19 @@ define('ImageDirectory','pics/');
 		$results = json_decode($instagramInfo, true);
 		
 		echo $results['data']['0']['id'];
+	}
+
+	// function to print out images on screen
+	function printImages($userID){
+		$url = 'https://api.instagram.com/v1/users/' .$userID. '/media/recent?client_id=' .clientID. '&count=5';
+		$instagramInfo = connectToInstagram($url);
+		$results = json_decode($instagramInfo, true);
+		//parse through the information one by one 
+		foreach($results['data'] as $items){
+			// going to go through all of my results and give myself back the url of those pictures because we want to save it in the PHP server
+			$image_url = $items['images']['low_resolution']['url'];
+			echo '<img src=" ' .$image_url. ' "/><br/>';
+		}
 	}
 
 if (isset($_GET['code'])){
@@ -57,7 +71,12 @@ if (isset($_GET['code'])){
      curl_close($curl);
 
      $results = json_decode($result, true);
-	 getUserID($results['user']['username']);
+
+	$userName = $results['user']['username'];
+
+	$userID = getUserID($userName);
+
+	printImages($userID);
      }
      else{
 ?>  
