@@ -1,0 +1,23 @@
+div {
+	border-style:double;
+	border-width: 7px;
+	padding: 30px;
+	border-color: black;
+	border-radius: 10px;
+
+}
+
+.container {
+	border-color: transparent;
+	height: 600px;
+}
+
+.row {
+	border-color: black;
+	margin-bottom: 40px;
+	background-color: gray;
+	 opacity: 0.8;
+}
+.list-group-item{
+	border: 0;
+}
