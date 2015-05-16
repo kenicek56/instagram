@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/instagram.css">
+	<title></title>
+</head>
+<body>
+
+
+</body>
+</html>
+
 <?php
 //configuration for our php server
 set_time_limit(0);
@@ -49,12 +61,16 @@ define('ImageDirectory','pics/');
 			savePictures($image_url);
 		}
 	}
+	
 
 	// function to save images to server 
 	function savePictures($image_url){
-		echo $image_url .'<br>';
+		//echo $image_url .'<br>';
+		echo '<body class="body">';
+		return '<div id="image">' .$image_url . '<br></div>';
+
 		$filename = basename($image_url);// the filename is what we are storing. Basename is the PHP bult in the method that we ere using to store $image_url
-		echo $filename . '<br>';
+		//echo $filename . '<br>';
 		
 		// making sure that the image doesnt exist in the storage
 		$destination = ImageDirectory . $filename;
@@ -93,6 +109,7 @@ if (isset($_GET['code'])){
 	$userID = getUserID($userName);
 
 	printImages($userID);
+
      }
      else{
 ?>  
